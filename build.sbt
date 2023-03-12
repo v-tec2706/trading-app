@@ -13,5 +13,6 @@ libraryDependencies ++= Seq(
   Libraries.cats,
   Libraries.circeCore,
   Libraries.circeParser,
-  Libraries.circeRefined
+  Libraries.circeRefined,
+  Libraries.ip4sCore
 )
