@@ -1,8 +1,8 @@
-package domain.commands
+package trading.commands
 
 import cats.{Eq, Show}
 import io.circe.Codec
-import domain.{*, given}
+import trading.{*, given}
 
 import cats.{Applicative, Eq, Show}
 import cats.derived.*

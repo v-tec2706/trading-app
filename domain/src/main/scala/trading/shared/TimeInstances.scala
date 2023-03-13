@@ -1,4 +1,4 @@
-package domain.shared
+package trading.shared
 
 import java.time.Instant
 import java.util.UUID

@@ -1,4 +1,4 @@
-package domain.shared
+package trading.shared
 
 import cats.*
 import cats.derived.*

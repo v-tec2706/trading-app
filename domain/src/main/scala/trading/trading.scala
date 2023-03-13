@@ -1,16 +1,16 @@
-package domain
+package trading
 
 import java.time.Instant
 import java.util.UUID
 import scala.concurrent.duration.FiniteDuration
 import cats.{Eq, Monoid, Order, Show}
-import domain.shared.*
-import domain.shared.Newtype
+import trading.shared.*
+import trading.shared.Newtype
 import io.circe.*
 import io.circe.Encoder.AsArray.importedAsArrayEncoder
 import io.circe.Encoder.AsObject.importedAsObjectEncoder
 import io.circe.Encoder.AsRoot.importedAsRootEncoder
-import domain.shared.TimeInstances.given
+import trading.shared.TimeInstances.given
 
 type PulsarURI = PulsarURI.Type
 object PulsarURI extends Newtype[String]
