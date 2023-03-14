@@ -1,9 +1,10 @@
 package trading.events
 
 import trading.commands.SwitchCommand
-import trading.{*, given}
+import trading.{ *, given }
+import trading.domain.{ *, given }
 
-import cats.{Applicative, Show}
+import cats.{ Applicative, Show }
 import cats.derived.*
 import cats.syntax.all.*
 import io.circe.Codec

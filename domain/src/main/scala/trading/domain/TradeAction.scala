@@ -1,4 +1,4 @@
-package trading
+package trading.domain
 
 import cats.Show
 import cats.derived.*

@@ -1,7 +1,8 @@
 import Dependencies._
 
-ThisBuild / version := "0.1.0-SNAPSHOT"
-ThisBuild / scalaVersion := "3.2.2"
+ThisBuild / version            := "0.1.0-SNAPSHOT"
+ThisBuild / scalaVersion       := "3.2.2"
+ThisBuild / evictionErrorLevel := Level.Warn
 
 lazy val root = (project in file("."))
   .settings(
@@ -11,9 +12,9 @@ lazy val root = (project in file("."))
 
 def dockerSettings(name: String) = List(
   Docker / packageName := s"trading-$name",
-  dockerBaseImage := "jdk17-curl:latest",
+  dockerBaseImage      := "jdk17-curl:latest",
   dockerExposedPorts ++= List(8080),
-  makeBatScripts := Nil,
+  makeBatScripts     := Nil,
   dockerUpdateLatest := true
 )
 
@@ -33,10 +34,17 @@ val commonSettings = List(
     Libraries.ironCore,
     Libraries.ironCats,
     Libraries.ironCirce,
-    Libraries.catsLaws % Test,
-    Libraries.monocleLaw % Test,
-    Libraries.scalacheck % Test,
-    Libraries.weaverCats % Test,
+    Libraries.fs2Kafka,
+    Libraries.http4sDsl,
+    Libraries.http4sMetrics,
+    Libraries.http4sServer,
+    Libraries.neutronCore,
+    Libraries.odin,
+    Libraries.redis4catsEffects,
+    Libraries.catsLaws         % Test,
+    Libraries.monocleLaw       % Test,
+    Libraries.scalacheck       % Test,
+    Libraries.weaverCats       % Test,
     Libraries.weaverDiscipline % Test,
     Libraries.weaverScalaCheck % Test
   )
@@ -46,6 +54,7 @@ lazy val domain = (project in file("domain"))
 
 lazy val lib = (project in file("lib"))
   .settings(commonSettings: _*)
+  .dependsOn(domain)
 
 lazy val core = (project in file("core"))
   .settings(commonSettings: _*)

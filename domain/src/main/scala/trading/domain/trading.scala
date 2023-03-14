@@ -1,16 +1,16 @@
-package trading
+package trading.domain
 
-import java.time.Instant
-import java.util.UUID
-import scala.concurrent.duration.FiniteDuration
-import cats.{Eq, Monoid, Order, Show}
-import trading.shared.*
-import trading.shared.Newtype
+import cats.{ Eq, Monoid, Order, Show }
 import io.circe.*
 import io.circe.Encoder.AsArray.importedAsArrayEncoder
 import io.circe.Encoder.AsObject.importedAsObjectEncoder
 import io.circe.Encoder.AsRoot.importedAsRootEncoder
+import trading.shared.*
 import trading.shared.TimeInstances.given
+
+import java.time.Instant
+import java.util.UUID
+import scala.concurrent.duration.FiniteDuration
 
 type PulsarURI = PulsarURI.Type
 object PulsarURI extends Newtype[String]
@@ -73,7 +73,7 @@ type AskPrice = Price
 type BidPrice = Price
 
 type HighPrice = Price
-type LowPrice = Price
+type LowPrice  = Price
 
 type OnlineUsers = OnlineUsers.Type
 object OnlineUsers extends Newtype[Int]:

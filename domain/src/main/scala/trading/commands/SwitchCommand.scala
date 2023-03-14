@@ -1,10 +1,11 @@
 package trading.commands
 
-import cats.{Eq, Show}
+import cats.{ Eq, Show }
 import io.circe.Codec
-import trading.{*, given}
+import trading.{ *, given }
+import trading.domain.{ *, given }
 
-import cats.{Applicative, Eq, Show}
+import cats.{ Applicative, Eq, Show }
 import cats.derived.*
 import cats.syntax.all.*
 import io.circe.Codec
