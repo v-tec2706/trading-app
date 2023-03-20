@@ -80,6 +80,5 @@ object Main extends IOApp.Simple:
       swProducer <- Producer.pulsar[IO, SwitchEvent](pulsar, sweTopic, swtSettings)
       trConsumer <- Consumer.pulsar[IO, TradeCommand](pulsar, cmdTopic, cmdSub(config.appId))
       swConsumer <- Consumer.pulsar[IO, SwitchCommand](pulsar, swcTopic, swtSub(config.appId), compact)
-      engine = null
-//      engine = Engine.fsm(trProducer, swProducer, Txn.make(pulsar), trConsumer, swConsumer)
+      engine = Engine.fsm(trProducer, swProducer, Txn.make(pulsar), trConsumer, swConsumer)
     yield (server, trConsumer, swConsumer, engine)
