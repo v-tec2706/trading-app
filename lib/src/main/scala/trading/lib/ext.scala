@@ -27,3 +27,12 @@ extension [F[_], A, B, C](src: Stream[F, Either[Either[Msg[A], Msg[B]], Msg[C]]]
       case Left(Right(mb)) => mb.asInstanceOf[Msg[A | B | C]]
       case Right(mc)       => mc.asInstanceOf[Msg[A | B | C]]
     }
+
+extension [F[_], A](src: Stream[F, A])
+  /* Perform an action when we get the first message without consuming it twice */
+  def onFirstMessage(action: F[Unit]): Stream[F, A] =
+    src.pull.uncons.flatMap {
+      case Some((chunk, tl)) =>
+        Pull.eval(action) >> Pull.output(chunk) >> tl.pull.echo
+      case None => Pull.done
+    }.stream
