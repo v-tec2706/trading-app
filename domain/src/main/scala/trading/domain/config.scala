@@ -26,5 +26,6 @@ object CirisOrphan:
   given ConfigDecoder[String, Port] =
     ConfigDecoder[String].mapOption("com.comcast.ip4s.Port")(Port.fromString)
 
-  given ConfigDecoder[String, PulsarURI] =
-    ConfigDecoder[String].mapOption("pulsarURI")(s => Some(PulsarURI(s)))
+  given ConfigDecoder[String, PulsarURI] = ConfigDecoder[String].map(PulsarURI(_))
+
+  given ConfigDecoder[String, RedisURI] = ConfigDecoder[String].map(RedisURI(_))

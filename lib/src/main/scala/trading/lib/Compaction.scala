@@ -2,6 +2,7 @@ package trading.lib
 
 import trading.commands.SwitchCommand
 import trading.events.SwitchEvent
+import trading.domain.{ Alert, PriceUpdate }
 
 import cats.syntax.all.*
 import dev.profunktor.pulsar.{ MessageKey, ShardKey }
@@ -23,8 +24,8 @@ object Compaction:
 
   def by(s: String): MessageKey = MessageKey.Of(s)
 
-//  given Compaction[PriceUpdate] with
-//    val key: PriceUpdate => MessageKey = p => by(p.symbol.show)
+  given Compaction[PriceUpdate] with
+    val key: PriceUpdate => MessageKey = p => by(p.symbol.show)
 
   given Compaction[SwitchCommand] with
     val key: SwitchCommand => MessageKey = {
@@ -39,8 +40,8 @@ object Compaction:
       case _: SwitchEvent.Ignored => by("ignored")
     }
 
-//  given Compaction[Alert] with
-//    val key: Alert => MessageKey = {
-//      case a: Alert.TradeAlert  => by(a.symbol.show)
-//      case a: Alert.TradeUpdate => by(a.status.show)
-//    }
+  given Compaction[Alert] with
+    val key: Alert => MessageKey = {
+      case a: Alert.TradeAlert  => by(a.symbol.show)
+      case a: Alert.TradeUpdate => by(a.status.show)
+    }

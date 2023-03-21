@@ -47,3 +47,8 @@ object Logger:
           msg.copy(position = msg.position.copy(enclosureName = "trading.lib.Logger", line = -1))
         }
     }
+
+  given redisLog[F[_]](using L: Logger[F]): Log[F] = new:
+    def debug(msg: => String): F[Unit] = L.debug(msg)
+    def error(msg: => String): F[Unit] = L.error(msg)
+    def info(msg: => String): F[Unit]  = L.info(msg)
