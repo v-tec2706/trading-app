@@ -2,14 +2,11 @@ package trading.domain
 
 import java.time.Instant
 import java.util.UUID
-
 import cats.syntax.all.*
 import ciris.{ ConfigDecoder, ConfigValue }
 import com.comcast.ip4s.*
 
-//extension [F[_], A](cv: ConfigValue[F, A])
-//  def fallback[Raw](value: Raw)(using ev: Wrapper[Raw, A]): ConfigValue[F, A] =
-//    cv.default(ev.iso.get(value))
+import scala.concurrent.duration.{ Duration, FiniteDuration }
 
 export CirisOrphan.given
 
@@ -29,3 +26,5 @@ object CirisOrphan:
   given ConfigDecoder[String, PulsarURI] = ConfigDecoder[String].map(PulsarURI(_))
 
   given ConfigDecoder[String, RedisURI] = ConfigDecoder[String].map(RedisURI(_))
+
+  given ConfigDecoder[String, KeyExpiration] = ConfigDecoder.stringFiniteDurationConfigDecoder.map(KeyExpiration(_))
