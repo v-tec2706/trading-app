@@ -101,3 +101,14 @@ lazy val forecasts = (project in file("forecasts"))
     )
   )
   .dependsOn(core)
+
+lazy val feed = (project in file("feed"))
+  .enablePlugins(DockerPlugin)
+  .enablePlugins(AshScriptPlugin)
+  .settings(commonSettings: _*)
+  .settings(dockerSettings("feed"))
+  .settings(
+    libraryDependencies += Libraries.scalacheck
+  )
+  .dependsOn(core)
+  .dependsOn(domain % "compile->compile;compile->test")
