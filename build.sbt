@@ -112,3 +112,18 @@ lazy val feed = (project in file("feed"))
   )
   .dependsOn(core)
   .dependsOn(domain % "compile->compile;compile->test")
+
+lazy val tracing = (project in file("tracing"))
+  .enablePlugins(DockerPlugin)
+  .enablePlugins(AshScriptPlugin)
+  .settings(commonSettings: _*)
+  .settings(dockerSettings("tracing"))
+  .settings(
+    libraryDependencies ++= List(
+      Libraries.http4sCirce,
+      Libraries.natchezCore,
+      Libraries.natchezHoneycomb
+    )
+  )
+  .dependsOn(core)
+  .dependsOn(domain % "compile->compile;test->test")
